@@ -1,50 +1,78 @@
-# coding utf-8
-
-
 # Função que imprime um cabeçalho
-def cabecalho():
+def cabecalho(bim):
     print('---' * 8)
-    print('Notas Do 1º Bimestre')
+    print(f'Notas Do {bim}º Bimestre')
     print('---' * 8)
 
 
 # Função que imprime na tela as notas e a média(média recebe certa cor dependendo da situação do aluno
 def media_cor(med):
     if med >= 7:
-        print(f'|   MÉDIA    |   \033[1;36m{media}\033[m   |')
+        print(f'|   MÉDIA    |   {media:.2f}   |')
         print('---' * 8)
         print('|  SITUAÇÃO: APROVADO  |')
         print('---' * 8)
     elif 5 < med < 7:
-        print(f'|   MÉDIA    |   \033[1;33m{media}\033[m   |')
+        print(f'|   MÉDIA    |   {media:.2f}   |')
         print('---' * 8)
         print('|  SITUAÇÃO: RECUPERAÇÃO  |')
         print('---' * 8)
     else:
-        print(f'|   MÉDIA    |   \033[1;31m{media}\033[m   |')
+        print(f'|   MÉDIA    |   {media:.2f}   |')
         print('---' * 8)
         print('|  SITUAÇÃO: REPROVADO  |')
         print('---' * 8)
 
+soma = 0
 
-cabecalho()
+# Dicionário criado para armazenar as notas de forma mais fácil de encontrar
+notas = {'nota1': 0, 'nota2': 0}
 
-# Inputs, pede ao usuário a nota 1, e nota 2
-nota1 = input('Digite a primeira nota: ')
-nota2 = input('Digite a segunda nota: ')
+# Quantas notas ele deseja adicionar
+qtd_notas = int(input('Quantas notas deseja adicionar: '))
 
-# Verificação de tipo de dados e alteração dos mesmos para tipos aritiméticos
-if not(nota1.isalpha() and nota2.isalpha()):
-    nota1, nota2 = float(nota1), float(nota2)
-elif nota1.isdigit() and nota2.isdigit():
-    nota1, nota2 = int(nota1), int(nota2)
+# Verificação de quantidade de notas e adicina ao dicionário
+for num in range(1, qtd_notas+1):
+    nome_key = f'nota{len(notas) + 1}'
+    value = 0
+    notas[nome_key] = value
 
-# Cálculo da média
-media = (nota1 + nota2) / 2
+tamanho_notas = len(notas)
+    
+for v in range(1,4+1):
+    cabecalho(v)
+    
+    # Loop para mostrar as notas.
+    for va in notas:
+        # Inputs, pede ao usuário nota1, nota2, ... notaN.
+        notas[va] = input(f'Digite a {va}: ')
 
-cabecalho()
-# Devolução do resultado
-print(f'|   NOTA 1   |   {nota1}   |\n'
-      f'|   NOTA 2   |   {nota2}   |')
+        # Substitui a vígula por ponto caso haja vírgula no valor.
+        if ',' in notas[va]:
+            notas[va] = notas[va].replace(',','.')
+    
+    for keys in notas:
+        # Verificação de tipo de dados e alteração dos mesmos para tipos aritiméticos
+        if not(notas[keys].isalpha()):
+            notas[keys] = float(notas[keys])
+        elif notas[keys] .isdigit():
+            notas[keys]  = int(notas[keys] )
 
-media_cor(media)
+    for valor in notas:
+        # Soma os valores
+        soma += notas[valor]
+        # Cálculo da média
+        media = soma / tamanho_notas
+
+        
+    cabecalho(v)
+    for chave, val in notas.items():
+        # Devolução do resultado
+        print(f'|   {chave}      |   {notas[chave]}   |')
+
+    media_cor(media)
+    print()
+
+    # Alterações em variáveis
+    v += 1
+    soma = 0
