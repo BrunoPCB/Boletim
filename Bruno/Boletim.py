@@ -1,7 +1,7 @@
 # Função que imprime um cabeçalho
 def cabecalho(bim):
     print('---' * 8)
-    print(f'Notas Do {bim}º Bimestre')
+    print(f'Notas do {bim}º Bimestre')
     print('---' * 8)
 
 
@@ -26,21 +26,21 @@ def media_cor(med):
 soma = 0
 
 # Dicionário criado para armazenar as notas de forma mais fácil de encontrar
-notas = {'nota1': 0, 'nota2': 0}
+notas = {'nota 1': 0, 'nota 2': 0}
 
 # Quantas notas ele deseja adicionar
 qtd_notas = int(input('Quantas notas deseja adicionar: '))
 
 # Verificação de quantidade de notas e adicina ao dicionário
-for num in range(1, qtd_notas+1):
-    nome_key = f'nota{len(notas) + 1}'
+for num in range(qtd_notas):
+    nome_key = f'nota {num + 1}'
     value = 0
     notas[nome_key] = value
 
 tamanho_notas = len(notas)
     
-for v in range(1,4+1):
-    cabecalho(v)
+for v in range(4):
+    cabecalho(v+1)
     
     # Loop para mostrar as notas.
     for va in notas:
@@ -65,7 +65,7 @@ for v in range(1,4+1):
         media = soma / tamanho_notas
 
         
-    cabecalho(v)
+    cabecalho(v+1)
     for chave, val in notas.items():
         # Devolução do resultado
         print(f'|   {chave}      |   {notas[chave]}   |')
